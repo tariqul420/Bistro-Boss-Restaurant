@@ -5,6 +5,12 @@ nav a.active {
   color: rgb(238, 255, 37);
 }
 
+.thumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
