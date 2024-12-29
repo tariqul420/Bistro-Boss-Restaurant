@@ -6,7 +6,7 @@ const MenuCart = ({ menu }) => {
     return (
         <div className="flex gap-4">
             <div>
-                <img src={image} alt={name} />
+                <img className="rounded-tr-full rounded-bl-full rounded-br-full object-cover" src={image} alt={name} />
             </div>
             <div>
                 <h2 className="text-xl font-medium font-Cinzel">{name} --------</h2>
