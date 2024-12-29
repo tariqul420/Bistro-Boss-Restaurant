@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cart from "../../assets/icon/cart.png"
 
 const Navbar = () => {
@@ -56,7 +56,9 @@ const Navbar = () => {
                             <img className="w-12" src={cart} alt="" />
                         </li>
                         <li>
-                            <button className="btn btn-warning bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto text-white border-white text-2xl ml-8">Login</button>
+                            <Link to='/login'>
+                                <button className="btn btn-warning bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto text-white border-white text-2xl ml-8">Login</button>
+                            </Link>
                         </li>
                     </ul>
                 </div>
