@@ -14,7 +14,7 @@ const OrderOnline = () => {
             <div className="w-10/12 mx-auto">
                 <Swiper
                     loop={true}
-                    slidesPerView={3}
+                    slidesPerView={4}
                     spaceBetween={30}
                     pagination={{
                         clickable: true,
@@ -33,6 +33,33 @@ const OrderOnline = () => {
                             left: '50%',
                             transform: 'translate(-50%, -50%)'
                         }}>Salads</p>
+                    </SwiperSlide>
+                    <SwiperSlide className="relative">
+                        <img className="w-full object-cover" src={img2} alt="Slide2" />
+                        <p className="font-Cinzel text-3xl text-center font-bold text-white absolute z-[999] up" style={{
+                            textShadow: '0 1px 0 #000',
+                            top: '80%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)'
+                        }}>Soups</p>
+                    </SwiperSlide>
+                    <SwiperSlide className="relative">
+                        <img className="w-full object-cover" src={img3} alt="Slide3" />
+                        <p className="font-Cinzel text-3xl text-center font-bold text-white absolute z-[999] up" style={{
+                            textShadow: '0 1px 0 #000',
+                            top: '80%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)'
+                        }}>pizzas</p>
+                    </SwiperSlide>
+                    <SwiperSlide className="relative">
+                        <img className="w-full object-cover" src={img4} alt="Slide4" />
+                        <p className="font-Cinzel text-3xl text-center font-bold text-white absolute z-[999] up" style={{
+                            textShadow: '0 1px 0 #000',
+                            top: '80%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)'
+                        }}>desserts</p>
                     </SwiperSlide>
                     <SwiperSlide className="relative">
                         <img className="w-full object-cover" src={img2} alt="Slide2" />
