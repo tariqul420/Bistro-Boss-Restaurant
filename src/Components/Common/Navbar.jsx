@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import cart from "../../assets/icon/cart.png"
 
 const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
@@ -30,13 +31,15 @@ const Navbar = () => {
         >
             <div className="w-11/12 mx-auto flex items-center justify-between">
                 <div>
-                    <h1 className="font-Cinzel text-white">
-                        <p className="font-black text-3xl">BISTRO BOSS</p>
-                        <p className="font-bold text-2xl tracking-[8px]">Restaurant</p>
-                    </h1>
+                    <NavLink to='/'>
+                        <h1 className="font-Cinzel text-white">
+                            <p className="font-black text-3xl">BISTRO BOSS</p>
+                            <p className="font-bold text-2xl tracking-[8px]">Restaurant</p>
+                        </h1>
+                    </NavLink>
                 </div>
                 <div>
-                    <ul className="text-white font-extrabold text-xl flex gap-2">
+                    <ul className="text-white font-extrabold text-xl flex items-center gap-3">
                         <li>
                             <NavLink to="/">Home</NavLink>
                         </li>
@@ -44,17 +47,17 @@ const Navbar = () => {
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard">Dashboard</NavLink>
-                        </li>
-                        <li>
                             <NavLink to="/our-menu">Our Menu</NavLink>
                         </li>
                         <li>
                             <NavLink to="/out-shop">Our Shop</NavLink>
                         </li>
-                        {/* <li>
-                            <button>Login</button>
-                        </li> */}
+                        <li>
+                            <img className="w-12" src={cart} alt="" />
+                        </li>
+                        <li>
+                            <button className="btn btn-warning bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto text-white border-white text-2xl ml-8">Login</button>
+                        </li>
                     </ul>
                 </div>
             </div>
