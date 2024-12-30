@@ -3,7 +3,7 @@ import MenuCart from "../Common/MenuCart";
 import axios from "axios";
 import Cover from "../Common/Cover";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ProductCart from "../Common/ProductCart";
 
 const MenuSection = ({ bg, subTitle, title, categoryName }) => {
@@ -30,7 +30,9 @@ const MenuSection = ({ bg, subTitle, title, categoryName }) => {
                 }
             </div>
             {
-                location.pathname === '/our-shop' ? "" : <button className="btn btn-neutral bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto mt-12 text-black text-2xl hover:text-white ">Order Your Favorite Food</button>
+                location.pathname === '/our-shop' ? "" : <Link to='/our-shop'>
+                    <button className="btn btn-neutral bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto mt-12 text-black text-2xl hover:text-white ">Order Your Favorite Food</button>
+                </Link>
             }
         </section>
     );
