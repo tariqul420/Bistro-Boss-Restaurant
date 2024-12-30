@@ -50,7 +50,7 @@ const Navbar = () => {
                             <NavLink to="/our-menu">Our Menu</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/out-shop">Our Shop</NavLink>
+                            <NavLink to="/our-shop">Our Shop</NavLink>
                         </li>
                         <li>
                             <img className="w-12" src={cart} alt="" />
