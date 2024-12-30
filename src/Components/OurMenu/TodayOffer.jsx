@@ -7,7 +7,7 @@ const TodayOffer = () => {
     const [offer, setOffer] = useState([])
 
     useEffect(() => {
-        axios.get('/menu.json')
+        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
             .then(res => {
                 const offer = res?.data.filter(offer => offer.category === "offered")
                 setOffer(offer)

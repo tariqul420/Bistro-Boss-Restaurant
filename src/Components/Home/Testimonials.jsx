@@ -11,7 +11,7 @@ const Testimonials = () => {
     const [review, setReview] = useState([])
 
     useEffect(() => {
-        axios.get('/reviews.json')
+        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/reviews`)
             .then(res => setReview(res.data))
     }, []);
 
@@ -22,7 +22,7 @@ const Testimonials = () => {
             <div>
                 <Swiper className="w-9/12 mx-auto" navigation={true} modules={[Navigation]}>
                     {
-                        review.map(review => <SwiperSlide key={review?._id}>
+                        review?.map(review => <SwiperSlide key={review?._id}>
                             <div className="px-28 flex items-center justify-center flex-col">
                                 <Rating
                                     style={{ maxWidth: 180 }}

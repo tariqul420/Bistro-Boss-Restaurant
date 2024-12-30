@@ -7,7 +7,7 @@ const OurMenuCart = () => {
     const [menus, setMenus] = useState([])
 
     useEffect(() => {
-        axios.get('/menu.json')
+        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
             .then(res => {
                 const popular = res?.data.filter(menu => menu.category === "popular")
                 setMenus(popular)
