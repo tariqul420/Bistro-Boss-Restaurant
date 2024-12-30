@@ -20,7 +20,7 @@ const OurMenu = () => {
             <TodayOffer />
             <MenuSection bg={dessertBg} title="DESSERTS" subTitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." categoryName="dessert" />
             <MenuSection bg={pizzaBg} title="Pizzas" subTitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." categoryName="pizza" />
-            <MenuSection bg={saladsBg} title="Salads" subTitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." categoryName="salads" />
+            <MenuSection bg={saladsBg} title="Salads" subTitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." categoryName="salad" />
             <MenuSection bg={soupsBg} title="Soups" subTitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." categoryName="soup" />
         </div>
     );
