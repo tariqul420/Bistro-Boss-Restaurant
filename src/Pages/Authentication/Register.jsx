@@ -9,7 +9,7 @@ import { TbFidgetSpinner } from "react-icons/tb";
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser, updateUser, loading } = useAuth();
+    const { createUser, updateUser, loading, setLoading } = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -22,6 +22,7 @@ const Register = () => {
             navigate('/')
         } catch (error) {
             toast.error(error.message)
+            setLoading(false)
         }
     };
 

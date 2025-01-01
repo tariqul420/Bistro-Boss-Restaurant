@@ -6,20 +6,31 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useEffect } from "react";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
+    const { loginUser, loading, setLoading } = useAuth();
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const { email, password, captcha } = data
 
         if (!validateCaptcha(captcha)) {
-            toast.error('Your Captcha Not Valid')
+            return toast.error('Your Captcha Not Valid')
         }
+        try {
+            await loginUser(email, password)
+            toast.success('Login Successfully ❤️')
+        } catch (error) {
+            toast.error(error.message)
+            setLoading(false)
+        }
+
     };
 
     return (
@@ -75,7 +86,11 @@ const Login = () => {
                                 className={`py-3 w-full rounded-md font-semibold text-white bg-[#d1a054]`}
                                 type="submit"
                             >
-                                Sign In
+                                {loading ? (
+                                    <TbFidgetSpinner className='animate-spin m-auto' />
+                                ) : (
+                                    'Continue'
+                                )}
                             </button>
                         </div>
                     </form>
