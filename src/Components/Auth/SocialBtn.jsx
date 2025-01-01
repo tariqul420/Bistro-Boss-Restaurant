@@ -21,6 +21,8 @@ const SocialBtn = ({ navigate }) => {
                 .then(() => {
                     toast.success(successMessage)
                     navigate
+                }).catch(error => {
+                    toast.error(error.code)
                 })
         } catch (error) {
             toast.error(error.code)
@@ -33,6 +35,8 @@ const SocialBtn = ({ navigate }) => {
                 .then(() => {
                     toast.success(successMessage)
                     navigate
+                }).catch(error => {
+                    toast.error(error.code)
                 })
         } catch (error) {
             toast.error(error.code)
@@ -71,7 +75,7 @@ const SocialBtn = ({ navigate }) => {
 };
 
 SocialBtn.propTypes = {
-    navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.object.isRequired,
 };
 
 export default SocialBtn;
