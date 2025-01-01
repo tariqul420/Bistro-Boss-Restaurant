@@ -3,11 +3,12 @@ import { useState } from "react";
 import { createContext } from "react";
 import auth from "../Firebase/firebase.config";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
-const AuthProvider = () => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -57,6 +58,7 @@ const AuthProvider = () => {
                 setLoading(false);
                 setUser(currentUser)
             } else {
+                setLoading(false);
                 setUser(null)
             }
         })
@@ -81,9 +83,13 @@ const AuthProvider = () => {
 
     return (
         <AuthContext.Provider value={authInfo}>
-
+            {children}
         </AuthContext.Provider>
     );
+};
+
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default AuthProvider;

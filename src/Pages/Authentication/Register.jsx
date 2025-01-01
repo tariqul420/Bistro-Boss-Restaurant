@@ -1,14 +1,28 @@
 import { useForm } from "react-hook-form";
 import bg from "../../assets/others/authentication.png"
 import authRS from "../../assets/others/authentication2.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
+    const { createUser, updateUser, loading } = useAuth();
+    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const { name, email, password } = data;
+
+        try {
+            await createUser(email, password)
+            await updateUser(name)
+            toast.success("Registration successfully ❤️")
+            navigate('/')
+        } catch (error) {
+            toast.error(error.message)
+        }
     };
 
     return (
@@ -57,7 +71,13 @@ const Register = () => {
 
                         {/* Submit Btn */}
                         <div>
-                            <button className="py-3 bg-[#d1a054] w-full rounded-md font-semibold text-white" type="submit">Sign Up</button>
+                            <button className="py-3 bg-[#d1a054] w-full rounded-md font-semibold text-white" type="submit">
+                                {loading ? (
+                                    <TbFidgetSpinner className='animate-spin m-auto' />
+                                ) : (
+                                    'Continue'
+                                )}
+                            </button>
                         </div>
                     </form>
 
