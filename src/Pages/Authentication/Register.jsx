@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import bg from "../../assets/others/authentication.png"
 import authRS from "../../assets/others/authentication2.png"
 import { Link, useNavigate } from "react-router-dom";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
@@ -85,17 +85,7 @@ const Register = () => {
                     <p className="text-xl font-medium text-[#d1a054] mt-4">Already registered? <Link to='/login'>Go to log in</Link></p>
                     <p className="mt-2 text-lg">Or sign up with</p>
 
-                    <ul className="border-solid border-black p-2 text-3xl flex gap-8 mt-3">
-                        <li className="border border-solid border-black p-1 rounded-full">
-                            <FaFacebook />
-                        </li>
-                        <li className="border border-solid border-black p-1 rounded-full">
-                            <FaGoogle />
-                        </li>
-                        <li className="border border-solid border-black p-1 rounded-full">
-                            <FaGithub />
-                        </li>
-                    </ul>
+                    <SocialBtn />
                 </div>
                 <div className="flex-1">
                     <img src={authRS} alt="Auth" />

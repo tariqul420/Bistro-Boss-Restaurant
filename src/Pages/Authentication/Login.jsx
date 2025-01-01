@@ -1,17 +1,19 @@
 import { useForm } from "react-hook-form";
 import bg from "../../assets/others/authentication.png";
 import authRS from "../../assets/others/authentication2.png";
-import { Link } from "react-router-dom";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useAuth from "../../Hooks/useAuth";
+import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const { loginUser, loading, setLoading } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -26,11 +28,11 @@ const Login = () => {
         try {
             await loginUser(email, password)
             toast.success('Login Successfully ❤️')
+            navigate(location?.state ? location?.state : '/')
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.code)
             setLoading(false)
         }
-
     };
 
     return (
@@ -102,17 +104,7 @@ const Login = () => {
                     <p className="mt-2 text-lg">Or sign up with</p>
 
                     {/* Social Media Icons */}
-                    <ul className="border-solid border-black p-2 text-3xl flex gap-8 mt-3">
-                        <li className="border border-solid border-black p-1 rounded-full cursor-pointer">
-                            <FaFacebook />
-                        </li>
-                        <li className="border border-solid border-black p-1 rounded-full cursor-pointer">
-                            <FaGoogle />
-                        </li>
-                        <li className="border border-solid border-black p-1 rounded-full cursor-pointer">
-                            <FaGithub />
-                        </li>
-                    </ul>
+                    <SocialBtn />
                 </div>
                 <div className="flex-1">
                     <img src={authRS} alt="Auth" />
