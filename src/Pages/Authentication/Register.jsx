@@ -9,7 +9,7 @@ import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser, updateUser, loading, setLoading } = useAuth();
+    const { createUser, updateUser, loading } = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -22,7 +22,6 @@ const Register = () => {
             navigate('/')
         } catch (error) {
             toast.error(error.message)
-            setLoading(false)
         }
     };
 
@@ -85,7 +84,7 @@ const Register = () => {
                     <p className="text-xl font-medium text-[#d1a054] mt-4">Already registered? <Link to='/login'>Go to log in</Link></p>
                     <p className="mt-2 text-lg">Or sign up with</p>
 
-                    <SocialBtn navigate={navigate('/')} />
+                    <SocialBtn redirectUrl="/" />
                 </div>
                 <div className="flex-1">
                     <img src={authRS} alt="Auth" />

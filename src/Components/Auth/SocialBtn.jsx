@@ -2,12 +2,13 @@ import { GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from "fi
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const SocialBtn = ({ navigate }) => {
+const SocialBtn = ({ redirectUrl }) => {
     const { socialLogin } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const facebookProvider = new FacebookAuthProvider();
     const googleProvider = new GoogleAuthProvider();
@@ -20,7 +21,7 @@ const SocialBtn = ({ navigate }) => {
             await socialLogin(facebookProvider)
                 .then(() => {
                     toast.success(successMessage)
-                    navigate
+                    navigate(redirectUrl)
                 }).catch(error => {
                     toast.error(error.code)
                 })
@@ -34,7 +35,7 @@ const SocialBtn = ({ navigate }) => {
             await socialLogin(googleProvider)
                 .then(() => {
                     toast.success(successMessage)
-                    navigate
+                    navigate(redirectUrl)
                 }).catch(error => {
                     toast.error(error.code)
                 })
@@ -47,7 +48,7 @@ const SocialBtn = ({ navigate }) => {
         try {
             await socialLogin(githubProvider)
             toast.success(successMessage)
-            navigate
+            navigate(redirectUrl)
         } catch (error) {
             toast.error(error.code)
         }
@@ -75,7 +76,7 @@ const SocialBtn = ({ navigate }) => {
 };
 
 SocialBtn.propTypes = {
-    navigate: PropTypes.object.isRequired,
+    redirectUrl: PropTypes.string.isRequired,
 };
 
 export default SocialBtn;

@@ -104,7 +104,7 @@ const Login = () => {
                     <p className="mt-2 text-lg">Or sign up with</p>
 
                     {/* Social Media Icons */}
-                    <SocialBtn navigate={navigate(location?.state ? location?.state : '/')} />
+                    <SocialBtn redirectUrl={location?.state ? location?.state : '/'} />
                 </div>
                 <div className="flex-1">
                     <img src={authRS} alt="Auth" />
