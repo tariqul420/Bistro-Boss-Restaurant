@@ -85,7 +85,7 @@ const Register = () => {
                     <p className="text-xl font-medium text-[#d1a054] mt-4">Already registered? <Link to='/login'>Go to log in</Link></p>
                     <p className="mt-2 text-lg">Or sign up with</p>
 
-                    <SocialBtn />
+                    <SocialBtn navigate={navigate('/')} />
                 </div>
                 <div className="flex-1">
                     <img src={authRS} alt="Auth" />
