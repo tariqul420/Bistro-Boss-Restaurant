@@ -4,7 +4,7 @@ import Cover from "../Common/Cover";
 import PropTypes from "prop-types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductCart from "../Common/ProductCart";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingSpinner from "../Common/LoadingSpinner";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -16,12 +16,14 @@ const MenuSection = ({ bg, subTitle, title, categoryName }) => {
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
 
     const { mutateAsync } = useMutation({
         mutationFn: async (cartData) => {
             await axiosSecure.post('/carts', cartData)
         },
         onSuccess: () => {
+            queryClient.invalidateQueries(["carts"]);
             toast.success('Item added to cart successfully')
         },
         onError: (error) => {

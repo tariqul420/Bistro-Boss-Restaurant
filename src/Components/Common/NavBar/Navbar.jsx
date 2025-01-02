@@ -3,11 +3,22 @@ import { Link, NavLink } from "react-router-dom";
 import cart from "../../../assets/icon/cart.png";
 import useAuth from "../../../Hooks/useAuth";
 import Profile from "./Profile";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
+
+    const { data: carts = [] } = useQuery({
+        queryKey: ['carts', user?.email],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/carts?email=${user?.email}`)
+            return data
+        }
+    })
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -57,7 +68,7 @@ const Navbar = () => {
                         </li>
                         <li className="relative">
                             <img className="w-12" src={cart} alt="" />
-                            <span className="absolute bottom-[2px] right-0 text-xs bg-red-500 text-black rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            <span className="absolute bottom-[2px] right-0 text-xs bg-red-500 text-black rounded-full w-5 h-5 flex items-center justify-center">{carts?.length}</span>
                         </li>
                         <li>
                             {
