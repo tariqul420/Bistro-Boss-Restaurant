@@ -11,7 +11,7 @@ const PrivateRouter = ({ children }) => {
 
     if (loading) return <LoadingSpinner />
 
-    return <Navigate state={location.pathname} to="/login" />
+    return <Navigate to="/login" state={{ from: location.pathname }} />
 };
 
 PrivateRouter.propTypes = {

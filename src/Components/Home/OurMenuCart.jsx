@@ -2,6 +2,7 @@ import axios from "axios";
 import Heading from "../Common/Heading";
 import MenuCart from "../Common/MenuCart";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const OurMenuCart = () => {
     const { data: menus = [] } = useQuery({
@@ -22,7 +23,9 @@ const OurMenuCart = () => {
                     menus.map(menu => <MenuCart key={menu?._id} menu={menu} />)
                 }
             </div>
-            <button className="btn btn-neutral bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto mt-12 text-black text-2xl hover:text-white ">Read More</button>
+            <Link to={'/our-menu'}>
+                <button className="btn btn-neutral bg-transparent border-x-0 border-t-0 border-b-4 font-semibold block mx-auto mt-12 text-black text-2xl hover:text-white ">Read More</button>
+            </Link>
         </section>
     );
 };

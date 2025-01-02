@@ -15,6 +15,8 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    console.log(location);
+
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
@@ -28,7 +30,7 @@ const Login = () => {
         try {
             await loginUser(email, password)
             toast.success('Login Successfully ❤️')
-            navigate(location?.state ? location?.state : '/')
+            navigate(location?.state?.from ? location?.state?.from : '/')
         } catch (error) {
             toast.error(error.code)
             setLoading(false)

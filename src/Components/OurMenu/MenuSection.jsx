@@ -2,13 +2,32 @@ import MenuCart from "../Common/MenuCart";
 import axios from "axios";
 import Cover from "../Common/Cover";
 import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductCart from "../Common/ProductCart";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../Common/LoadingSpinner";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MenuSection = ({ bg, subTitle, title, categoryName }) => {
     const location = useLocation()
+    const axiosSecure = useAxiosSecure()
+    const { user } = useAuth()
+    const navigate = useNavigate()
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (cartData) => {
+            await axiosSecure.post('/carts', cartData)
+        },
+        onSuccess: () => {
+            toast.success('Item added to cart successfully')
+        },
+        onError: (error) => {
+            toast.error(error.response.data)
+        }
+    })
 
     const { data: menus = [], isLoading } = useQuery({
         queryKey: ['menus', categoryName],
@@ -18,6 +37,40 @@ const MenuSection = ({ bg, subTitle, title, categoryName }) => {
             return offer
         }
     })
+
+    const handelAddToCart = async (menuItem) => {
+        if (!user) {
+            Swal.fire({
+                title: "Go to login page",
+                text: "You need to login to add this item to cart",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#242C37",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login", { state: { from: location.pathname } })
+                }
+            });
+        }
+
+        const cartData = {
+            productId: menuItem?._id,
+            name: menuItem?.name,
+            price: menuItem?.price,
+            image: menuItem?.image,
+            recipe: menuItem?.recipe,
+            category: menuItem?.category,
+            buyer: {
+                name: user?.displayName,
+                email: user?.email,
+                photo: user?.photoURL
+            }
+        }
+
+        await mutateAsync(cartData)
+    }
 
     if (isLoading) return <LoadingSpinner smallHeight={false} />
 
@@ -29,7 +82,7 @@ const MenuSection = ({ bg, subTitle, title, categoryName }) => {
 
             <div className={`grid ${location.pathname === '/our-shop' ? 'grid-cols-3' : 'grid-cols-2 w-10/12'} gap-6 mx-auto mt-[45px]`}>
                 {
-                    menus?.map(menu => location.pathname === '/our-shop' ? <ProductCart key={menu?._id} menu={menu} /> : <MenuCart key={menu?._id} menu={menu} />)
+                    menus?.map(menu => location.pathname === '/our-shop' ? <ProductCart key={menu?._id} menu={menu} handelAddToCart={handelAddToCart} /> : <MenuCart key={menu?._id} menu={menu} />)
                 }
             </div>
             {
