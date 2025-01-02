@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Heading from "../../Components/Common/Heading"
 import '@smastrom/react-rating/style.css'
 import axios from "axios";
@@ -6,14 +5,20 @@ import { Rating } from "@smastrom/react-rating";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from "swiper/modules";
 import { BiSolidQuoteLeft } from "react-icons/bi";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
 const Testimonials = () => {
-    const [review, setReview] = useState([])
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/reviews`)
-            .then(res => setReview(res.data))
-    }, []);
+    const { data: review = [], isLoading } = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+            const { data } = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/reviews`)
+            return data
+        }
+    })
+
+    if (isLoading) return <LoadingSpinner smallHeight={false} />
 
     return (
         <section className="mb-[130px]">

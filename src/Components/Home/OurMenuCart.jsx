@@ -1,18 +1,17 @@
 import axios from "axios";
 import Heading from "../Common/Heading";
-import { useEffect, useState } from "react";
 import MenuCart from "../Common/MenuCart";
+import { useQuery } from "@tanstack/react-query";
 
 const OurMenuCart = () => {
-    const [menus, setMenus] = useState([])
-
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
-            .then(res => {
-                const popular = res?.data.filter(menu => menu.category === "popular")
-                setMenus(popular)
-            })
-    }, []);
+    const { data: menus = [] } = useQuery({
+        queryKey: ["menus"],
+        queryFn: async () => {
+            const { data } = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
+            const popular = data.filter(menu => menu.category === "popular")
+            return popular
+        }
+    })
 
     return (
         <section className="w-10/12 mx-auto">

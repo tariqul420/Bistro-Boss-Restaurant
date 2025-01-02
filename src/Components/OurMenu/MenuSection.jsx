@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
 import MenuCart from "../Common/MenuCart";
 import axios from "axios";
 import Cover from "../Common/Cover";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import ProductCart from "../Common/ProductCart";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
 const MenuSection = ({ bg, subTitle, title, categoryName }) => {
-    const [offer, setOffer] = useState([])
     const location = useLocation()
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
-            .then(res => {
-                const offer = res?.data.filter(offer => offer.category === categoryName)
-                setOffer(offer)
-            })
-    }, [categoryName]);
+    const { data: menus = [], isLoading } = useQuery({
+        queryKey: ['menus', categoryName],
+        queryFn: async () => {
+            const { data } = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/menus`)
+            const offer = data.filter(offer => offer.category === categoryName)
+            return offer
+        }
+    })
+
+    if (isLoading) return <LoadingSpinner smallHeight={false} />
 
     return (
         <section className="my-[45px]">
@@ -26,7 +29,7 @@ const MenuSection = ({ bg, subTitle, title, categoryName }) => {
 
             <div className={`grid ${location.pathname === '/our-shop' ? 'grid-cols-3' : 'grid-cols-2 w-10/12'} gap-6 mx-auto mt-[45px]`}>
                 {
-                    offer.map(menu => location.pathname === '/our-shop' ? <ProductCart key={menu?._id} menu={menu} /> : <MenuCart key={menu?._id} menu={menu} />)
+                    menus?.map(menu => location.pathname === '/our-shop' ? <ProductCart key={menu?._id} menu={menu} /> : <MenuCart key={menu?._id} menu={menu} />)
                 }
             </div>
             {
