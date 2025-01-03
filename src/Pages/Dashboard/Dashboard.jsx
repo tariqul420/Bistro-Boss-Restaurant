@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 const Dashboard = () => {
     return (
         <section className="flex">
-            <div className="min-h-screen w-[25%] dashboard bg-[#d1a054] p-12">
+            <div className="min-h-screen w-[25%] dashboard bg-[#d1a054] p-12 overflow-y-auto h-screen scrollbar-hidden">
                 <div className="mb-8">
                     <NavLink to='/'>
                         <h1 className="font-Cinzel text-white">
@@ -33,7 +33,7 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-[75%]">
+            <div className="w-[75%] overflow-y-auto h-screen scrollbar-hidden">
                 <Outlet />
             </div>
         </section>
