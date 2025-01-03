@@ -3,22 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import cart from "../../../assets/icon/cart.png";
 import useAuth from "../../../Hooks/useAuth";
 import Profile from "./Profile";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const { user } = useAuth()
-    const axiosSecure = useAxiosSecure()
+    const [carts] = useCart()
 
-    const { data: carts = [] } = useQuery({
-        queryKey: ['carts', user?.email],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/carts?email=${user?.email}`)
-            return data
-        }
-    })
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;

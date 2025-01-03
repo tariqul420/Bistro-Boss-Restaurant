@@ -6,6 +6,7 @@ import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import OurShop from "../Pages/OurShop";
 import Contact from "../Pages/Contact";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,15 @@ const router = createBrowserRouter([
         path: '/register',
         element: <Register />
     },
+    {
+        path: '/dashboard',
+        element: <Dashboard />,
+        children: [
+            {
+
+            }
+        ]
+    }
 ])
 
 export default router
