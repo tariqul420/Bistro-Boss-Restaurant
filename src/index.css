@@ -9,6 +9,10 @@ nav a.active {
   color: rgb(238, 255, 37);
 }
 
+.dashboard a.active {
+  color: white;
+}
+
 .thumbs {
   display: flex;
   align-items: center;

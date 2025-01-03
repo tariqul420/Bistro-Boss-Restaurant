@@ -7,6 +7,8 @@ import Register from "../Pages/Authentication/Register";
 import OurShop from "../Pages/OurShop";
 import Contact from "../Pages/Contact";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import PrivateRouter from "./PrivateRouter";
+import MyCart from "../Pages/Dashboard/User/UserPage/MyCart";
 
 const router = createBrowserRouter([
     {
@@ -41,10 +43,14 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard />,
+        element:
+            <PrivateRouter>
+                <Dashboard />
+            </PrivateRouter>,
         children: [
             {
-
+                index: true,
+                element: < MyCart />
             }
         ]
     }

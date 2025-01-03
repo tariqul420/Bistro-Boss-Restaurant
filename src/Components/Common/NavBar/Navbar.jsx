@@ -58,6 +58,9 @@ const Navbar = () => {
                         <li>
                             <NavLink to="/our-shop">Our Shop</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/dashboard">Dashboard</NavLink>
+                        </li>
                         <li className="relative">
                             <img className="w-12" src={cart} alt="" />
                             <span className="absolute bottom-[2px] right-0 text-xs bg-red-500 text-black rounded-full w-5 h-5 flex items-center justify-center">{carts?.length}</span>
