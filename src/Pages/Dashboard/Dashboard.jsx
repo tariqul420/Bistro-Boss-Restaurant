@@ -6,7 +6,7 @@ import { MdEmail } from "react-icons/md";
 
 const Dashboard = () => {
     return (
-        <section className="flex gap-20">
+        <section className="flex">
             <div className="min-h-screen w-[25%] dashboard bg-[#d1a054] p-12">
                 <div className="mb-8">
                     <NavLink to='/'>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-[75%] flex justify-center">
+            <div className="w-[75%]">
                 <Outlet />
             </div>
         </section>
