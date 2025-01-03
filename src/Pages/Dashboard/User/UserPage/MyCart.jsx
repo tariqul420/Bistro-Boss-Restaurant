@@ -1,7 +1,11 @@
+import Heading from "../../../../Components/Common/Heading";
+
 const MyCart = () => {
     return (
         <div>
-            This is a my cart page
+            <div className="-mt-12">
+                <Heading subTitle="My cart" title="WANNA ADD MORE?" />
+            </div>
         </div>
     );
 };

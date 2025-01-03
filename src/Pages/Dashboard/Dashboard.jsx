@@ -8,6 +8,14 @@ const Dashboard = () => {
     return (
         <section className="flex gap-20">
             <div className="min-h-screen w-[25%] dashboard bg-[#d1a054] p-12">
+                <div className="mb-8">
+                    <NavLink to='/'>
+                        <h1 className="font-Cinzel text-white">
+                            <p className="font-black text-2xl">BISTRO BOSS</p>
+                            <p className="font-bold text-1xl tracking-[8px]">Restaurant</p>
+                        </h1>
+                    </NavLink>
+                </div>
                 <User />
                 <div className="divider"></div>
                 <ul className="text-black font-extrabold text-xl space-y-4">
@@ -25,10 +33,9 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-[75%]">
+            <div className="w-[75%] flex justify-center">
                 <Outlet />
             </div>
-
         </section>
     );
 };
